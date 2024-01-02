@@ -114,17 +114,16 @@ fn setup(
         ..default()
     });
 
-    let custom_gltf = asset_server.load("penis/penis.gltf#Scene0");
+    let custom_gltf = asset_server.load("coin/scene.gltf#Scene0");
     let coin_array = (-5..5).cartesian_product(-5..5);
     for coin in coin_array {
         let mut toy_transform = Transform::from_xyz((coin.0 * 2) as f32, 2.0, (coin.1 * 2) as f32)
-            .with_scale(Vec3::new(0.01, 0.01, 0.01));
+            .with_scale(Vec3::new(50.01, 50.01, 50.01));
         //toy_transform.rotate_x(-45.0);
         commands.spawn((
             SceneBundle {
                 scene: custom_gltf.clone(),
                 transform: toy_transform,
-
                 ..default()
             },
             CoinState {},
@@ -197,9 +196,7 @@ fn move_coin(
         //transform.rotate_y += transform.rotate_y(timer.delta_seconds()) * 0.1;
         //transform.rotation.y += 0.1 * timer.delta_seconds();
         transform.translation.y +=
-            ((3.0 * f32::sin(3.0 * timer.elapsed().as_secs_f32())) * timer.delta_seconds());
-
-        //1.0 * timer.delta_seconds().sin();
+            (3.0 * f32::sin(3.0 * timer.elapsed().as_secs_f32())) * timer.delta_seconds();
     }
 }
 
